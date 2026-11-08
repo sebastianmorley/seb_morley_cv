@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seb Morley — AI Engineer, Engineering &amp; Design</title>
+<meta name="description" content="Seb Morley: AI engineer at Singular Machines and MSc student in AI &amp; Machine Learning for Engineering and Design at the University of Bath.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F6F8FB;
+    --panel: #EDF1F6;
+    --ink: #16202B;
+    --muted: #5B6B7C;
+    --rule: #CBD5E1;
+    --navy: #1F4E79;
+    --navy-ink: #FFFFFF;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #121A23;
+      --panel: #18222D;
+      --ink: #E6EBF1;
+      --muted: #9AAABB;
+      --rule: #2B3845;
+      --navy: #7FB0E0;
+      --navy-ink: #0E1620;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--navy); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 72px;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .side {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 56px 0 40px;
+  }
+  .name {
+    font-size: 44px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin: 0 0 14px;
+  }
+  .role {
+    font-size: 17px;
+    line-height: 1.35;
+    color: var(--muted);
+    margin: 0 0 28px;
+    max-width: 24ch;
+  }
+  .contact { list-style: none; margin: 0 0 36px; padding: 0; font-size: 15px; }
+  .contact li { padding: 7px 0; border-top: 1px solid var(--rule); }
+  .contact li:last-child { border-bottom: 1px solid var(--rule); }
+  .contact a { color: inherit; text-decoration: none; }
+  .contact a:hover { color: var(--navy); }
+  .contact span { color: var(--muted); display: inline-block; width: 5.5em; }
+
+  .toc { list-style: none; margin: 0; padding: 0; font-size: 15px; }
+  .toc li { margin: 0; }
+  .toc a {
+    display: block;
+    padding: 5px 0 5px 14px;
+    color: var(--muted);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+  }
+  .toc a:hover, .toc a.active { color: var(--ink); border-left-color: var(--navy); }
+
+  .download {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--navy);
+    color: var(--navy-ink);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 13px 18px;
+    border-radius: 4px;
+    width: fit-content;
+  }
+  .download:hover { filter: brightness(1.08); }
+  .download svg { width: 16px; height: 16px; }
+
+  /* ---------- Main ---------- */
+  .main { padding: 64px 0 96px; max-width: 760px; }
+
+  .profile {
+    font-size: 19px;
+    line-height: 1.5;
+    margin: 0 0 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  section { margin-bottom: 56px; scroll-margin-top: 24px; }
+  h2 {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    color: var(--navy);
+    margin: 0 0 22px;
+  }
+  h3 { font-size: 17px; font-weight: 600; margin: 0; line-height: 1.35; }
+  .org { color: var(--muted); margin: 2px 0 0; }
+  .note { font-style: italic; color: var(--muted); margin: 6px 0 0; }
+
+  /* Timeline entries: date in a left gutter, body to the right */
+  .entry {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 24px;
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .entry:last-of-type { border-bottom: 1px solid var(--rule); }
+  .when {
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.4;
+    padding-top: 3px;
+    font-variant-numeric: tabular-nums;
+  }
+  .entry ul { margin: 10px 0 0; padding-left: 18px; }
+  .entry li { margin: 5px 0; }
+  .entry li::marker { color: var(--muted); }
+
+  /* Project list */
+  .project { padding: 18px 0; border-top: 1px solid var(--rule); }
+  .project:last-child { border-bottom: 1px solid var(--rule); }
+  .project h3 { display: flex; gap: 12px; justify-content: space-between; align-items: baseline; }
+  .project h3 span { color: var(--muted); font-weight: 400; font-size: 15px; white-space: nowrap; }
+  .project p { margin: 6px 0 0; }
+
+  /* Skills: label / detail rows */
+  .skills { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 0 24px; }
+  .skills dt { font-weight: 600; padding: 12px 0; border-top: 1px solid var(--rule); }
+  .skills dd { margin: 0; padding: 12px 0; border-top: 1px solid var(--rule); }
+  .skills dt:last-of-type, .skills dd:last-of-type { border-bottom: 1px solid var(--rule); }
+
+  /* Grouped lists (leadership etc.) */
+  .group { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 24px; padding: 16px 0; border-top: 1px solid var(--rule); }
+  .group:last-child { border-bottom: 1px solid var(--rule); }
+  .group h3 { font-weight: 600; }
+  .group ul { margin: 0; padding-left: 18px; }
+  .group li { margin: 5px 0; }
+  .group li::marker { color: var(--muted); }
+  .group p { margin: 0; }
+
+  footer { color: var(--muted); font-size: 14px; padding-top: 24px; border-top: 1px solid var(--rule); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .page { grid-template-columns: 1fr; gap: 0; }
+    .side { position: static; height: auto; padding: 40px 0 8px; }
+    .toc { display: none; }
+    .download { margin-top: 4px; }
+    .main { padding-top: 40px; }
+  }
+  @media (max-width: 560px) {
+    .name { font-size: 38px; }
+    .entry, .skills, .group { grid-template-columns: 1fr; gap: 6px; }
+    .skills dd { border-top: 0; padding-top: 0; }
+    .skills dt { padding-bottom: 2px; }
+    .project h3 { flex-direction: column; gap: 2px; }
+    .contact span { display: block; width: auto; font-size: 13px; }
+  }
+  @media print {
+    .side { position: static; height: auto; }
+    .toc, .download { display: none; }
+    .page { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <aside class="side">
+    <h1 class="name">Seb Morley</h1>
+    <p class="role">Postgraduate in AI &amp; Machine Learning for Engineering</p>
+
+    <ul class="contact">
+      <li><span>Location</span>Oxford, UK</li>
+      <li><span>Email</span><a href="mailto:sm3442@bath.ac.uk">sm3442@bath.ac.uk</a></li>
+      <li><span>Phone</span><a href="tel:+447957283363">+44 7957 283363</a></li>
+      <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/sebastian-morley-15819230b/" rel="me">Sebastian Morley</a></li>
+    </ul>
+
+    <nav aria-label="Sections">
+      <ul class="toc">
+        <li><a href="#education">Education</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Technical skills</a></li>
+        <li><a href="#other">Other skills &amp; experience</a></li>
+        <li><a href="#interests">Interests</a></li>
+      </ul>
+    </nav>
+
+    <a class="download" href="Seb_Morley_CV.pdf" download>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2v8m0 0 3-3M8 10 5 7M3 13h10"/></svg>
+      Download CV (PDF)
+    </a>
+  </aside>
+
+  <main class="main">
+
+    <p class="profile">AI engineer placement student at Singular Machines, a scaling start-up company aiming to transform the way traditional engineering gets done across different environments (Nuclear, Construction, Robotics). Interested in the intersection between probabilistic ML models and deterministic solvers, and where AI is/isn’t useful. With a background in Architectural design and developing ML pipelines in Python, to harness-engineering in C#, I feel passionate about steering the future of AI in engineering design. I enjoy solving problems and puzzles, and thrive in fast-paced teams who are eager to keep learning.</p>
+
+    <section id="education">
+      <h2>Education</h2>
+
+      <article class="entry">
+        <div class="when">September 2025 to September 2027</div>
+        <div>
+          <h3>MSc - Artificial Intelligence &amp; Machine Learning for Engineering and Design</h3>
+          <p class="org">(including full-time placement) - University of Bath</p>
+          <p class="note">77% average across modules. Distinction in all modules.</p>
+          <ul>
+            <li><strong>AI and machine learning for engineering</strong> – Implementing supervised and unsupervised machine learning models to process and interpret data for innovative engineering solutions - (87% on final exam).</li>
+            <li><strong>Smart Cities and IoT</strong> – Designing IoT architectures and integrating real-time sensor networks for data-driven analytics in smart infrastructure applications - 78%.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="when">September 2022 to May 2025</div>
+        <div>
+          <h3>BSc - Architecture</h3>
+          <p class="org">Welsh School of Architecture, Cardiff</p>
+          <p class="note">Graduated with High 2:1 (69) - Achieving a first-class average in my third year of the undergraduate program.</p>
+          <ul>
+            <li><strong>Architecture Design</strong> - Achieved 1st-class mark of 75% on final comprehensive design project.</li>
+            <li><strong>Building Economics</strong> - Achieved 1st-class mark of 77% on the application of economic principles to a building case study, presented through written and oral report.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="when">September 2020 to June 2022</div>
+        <div>
+          <h3>A-Levels</h3>
+          <p class="org">Prior Park College, Bath</p>
+          <p class="note">Achieved A* - Physics, A* - Design Technology, A* - Theatre studies, A* - Extended Project Qualification (EPQ)</p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="when"></div>
+        <div>
+          <h3>GCSEs</h3>
+          <p class="org">Prior Park College, Bath</p>
+          <p class="note">Achieved all A*s including Maths, English and Science.</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="experience">
+      <h2>Professional Experience</h2>
+
+      <article class="entry">
+        <div class="when">June 2026 - Present</div>
+        <div>
+          <h3>AI Engineer</h3>
+          <p class="org">Singular Machines Limited – Culham Campus</p>
+          <ul>
+            <li>Designing code harnesses to constrain LLM behaviour, acknowledging the limitations of where agentic systems can sit when designing engineering machinery in critical environments.</li>
+            <li>Architecturing pipelines from RAG and SQL data structures, to APIs and creating tools within an MCP.</li>
+            <li>Leading Projects and managing deliverables alongside ongoing software development within engineering team.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="when">September 2022 to June 2023</div>
+        <div>
+          <h3>GCSE and A-Level Physics Tutor</h3>
+          <p class="org">MyTutor</p>
+          <ul>
+            <li>Enabled measurable improvement in student understanding and performance.</li>
+            <li>Developed communication skills by clarifying concepts and adjusting support to individual needs.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="when">July 2021</div>
+        <div>
+          <h3>Architecture Work Experience</h3>
+          <p class="org">Designscape Architects, Bath</p>
+          <ul>
+            <li>Gained insight into construction processes, from early concepts to on-site coordination.</li>
+            <li>Joined site visits and engaged with architects to learn professional workflows and design implementation.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <section id="projects">
+      <h2>Selected Projects</h2>
+
+      <article class="project">
+        <h3>Concrete Compressive Strength Recognition System <span>2025</span></h3>
+        <p>Developed and compared machine learning models to predict concrete compressive strength, demonstrating AI-driven optimisation for structural engineering applications, all models achieving over 0.9 R<sup>2</sup> scores. Presented findings to a varied façade engineering company audience, with visualization using Matplotlib.</p>
+      </article>
+
+      <article class="project">
+        <h3>Edge-Deployment Smart Leak Detection for Urban Water Distribution Networks <span>2026</span></h3>
+        <p>Designing an edge AI pipeline simulating sparse pressure sensors and training ML models to detect and localise leaks across urban water networks in real time, integrating generative sensor placement optimisation.</p>
+      </article>
+
+      <article class="project">
+        <h3>CNN-Integrated Closed-Loop Digital Twin for FDM 3D Printing <span>2026</span></h3>
+        <p>Developing closed-loop cyber-physical system, combining multi-head CNN for real-time parameter classification from camera images, feeding into an MPC to autonomously correct parameter drift before defects form in additive manufacturing.</p>
+      </article>
+
+      <article class="project">
+        <h3>An Interpretable Prototype-Based Detection Pipeline for Steel Surface Defects <span>2026</span></h3>
+        <p>Integrated Proto-BagNet classifcation onto YOLO26 detection backbone, attempting to challenge the existing post-hoc explainability methods such as EigenCAM, which can produce misleading heatmaps, with an ante-hoc method to embed interpretability into model training.</p>
+      </article>
+    </section>
+
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <dl class="skills">
+        <dt>Programming</dt>
+        <dd>Python (NumPy, Pandas, scikit-learn, TensorFlow), MATLAB, IoT data exchange with microcontrollers using C++. SQL for data structuring. Python for models, C# for engineering types and interfaces,</dd>
+        <dt>Data preprocessing</dt>
+        <dd>Normalisation and scaling, outlier handling, imputation, dimensionality reduction (PCA, SVD, LDA), feature selection, train/validation/test splitting and cross-validation.</dd>
+        <dt>AI &amp; Machine Learning Models</dt>
+        <dd>Supervised &amp; unsupervised learning (boosting &amp; bagging models), Deep learning architectures: CNNs &amp; ANNs, LSTM &amp; RNN, LLM + Transformers, GNNs.</dd>
+        <dt>Tools &amp; Platforms</dt>
+        <dd>Git/GitHub, Jupyter Notebooks, Google Colab, VS Code, .NET.</dd>
+      </dl>
+    </section>
+
+    <section id="other">
+      <h2>Other Skills and Additional Experiences</h2>
+
+      <div class="group">
+        <h3>Leadership</h3>
+        <ul>
+          <li>Lead Engineer on nuclear decommissioning project for extracting graphite from UK's oldest Nuclear reactor.</li>
+          <li>Head-boy, Prefect and Peer Mentor at Prior Park College Senior School.</li>
+          <li>Tennis Captain, for school and Men’s BUCS team for University of Cardiff.</li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <h3>Presentation</h3>
+        <ul>
+          <li>London Academy of Music and Drama Qualification - Communication Grade 8 Distinction.</li>
+          <li>Performance Grade 8 Distinction, Musical Theatre Grade 8 Distinction.</li>
+          <li>Presented variety of oral presentations including EPQ and architectural projects.</li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <h3>Teamwork</h3>
+        <ul>
+          <li>Appointed Academic Representative for MSc cohort at Bath University, to facilitate communication between postgraduates, academic staff and faculty heads.</li>
+          <li>Part-time job as a Marquee Rigger, working on event sites across South-West of UK. Collaborating in fast paced team to ensure efficient setup under tight deadlines.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="interests">
+      <h2>Interests</h2>
+
+      <div class="group">
+        <h3>AI-Human Teaming</h3>
+        <p>Interested in how intelligent systems can collaborate meaningfully with people, attended art-ai AI Challenge Day to advance research through discussion and workshop code challenges.</p>
+      </div>
+      <div class="group">
+        <h3>Problems and puzzles</h3>
+        <p>Enjoy completing LeetCode exercises in my spare time, and logic puzzles.</p>
+      </div>
+      <div class="group">
+        <h3>Charity work</h3>
+        <p>Completed the SAS Fan Dance endurance challenge raising £1000 for charity.</p>
+      </div>
+    </section>
+
+    <footer><a href="Seb_Morley_CV.pdf">PDF version</a></footer>
+  </main>
+</div>
+
+<script>
+  // Highlight the current section in the side nav as the reader scrolls.
+  (function () {
+    var links = document.querySelectorAll('.toc a');
+    if (!links.length || !('IntersectionObserver' in window)) return;
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          links.forEach(function (a) { a.classList.remove('active'); });
+          map[e.target.id] && map[e.target.id].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { io.observe(s); });
+  })();
+</script>
+</body>
+</html>
